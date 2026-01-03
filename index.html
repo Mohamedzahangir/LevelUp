@@ -8,7 +8,23 @@
 </head>
 <body>
 
-  <main class="dashboard">
+
+  <div class="loading-screen">
+  <div class="loading-content">
+
+    <div class="potential-ring">
+      <svg viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="90" class="ring-bg" />
+        <circle cx="100" cy="100" r="90" class="ring-progress" />
+      </svg>
+    </div>
+
+    <p class="loading-text">Unleashing your potential</p>
+
+  </div>
+</div>
+
+  <main class="dashboard hidden">
 
     <!-- LEVEL (Identity) -->
     <section class="level">
@@ -18,11 +34,29 @@
     </section>
 
     <!-- XP PROGRESS -->
-    <section class="xp">
-      <div class="xp-ring">
-        <span class="xp-text">0 / 100 XP</span>
-      </div>
-    </section>
+  <section class="xp">
+  <div class="xp-ring">
+    <svg viewBox="0 0 200 200">
+      <!-- background -->
+      <circle
+        cx="100"
+        cy="100"
+        r="90"
+        class="xp-bg"
+      />
+      <!-- progress -->
+      <circle
+        cx="100"
+        cy="100"
+        r="90"
+        class="xp-progress"
+      />
+    </svg>
+    <span class="xp-text">0 / 100 XP</span>
+  </div>
+</section>
+
+
 
     <!-- STREAK -->
     <section class="streak">

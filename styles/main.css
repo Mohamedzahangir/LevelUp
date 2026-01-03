@@ -49,6 +49,7 @@ body {
   font-weight: 700;
   color: var(--blue);
   line-height: 1;
+  display: inline-block;
 }
 
 .level .tagline {
@@ -59,20 +60,46 @@ body {
 
 /* XP RING (placeholder) */
 .xp-ring {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.xp-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.xp-bg {
+  fill: none;
+  stroke: rgba(59,130,246,0.25);
+  stroke-width: 8;
+}
+
+.xp-progress {
+  fill: none;
+  stroke: #ff8c42;
+  stroke-width: 8;
+  stroke-linecap: round;
+
+  stroke-dasharray: 565;
+  stroke-dashoffset: 565;
+
+  transition: stroke-dashoffset 0.6s ease;
+}
+
+
+.xp-text {
+  position: absolute;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 4px solid rgba(59, 130, 246, 0.35);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
-}
-
-.xp-text {
   font-size: 0.9rem;
   color: var(--text-muted);
 }
+
 
 /* STREAK */
 .streak {
@@ -97,4 +124,87 @@ body {
 .primary-action:active {
   transform: scale(0.97);
   box-shadow: 0 0 0 2px rgba(255, 140, 66, 0.4);
+}
+
+/* ---------- LEVEL UP FEEDBACK ---------- */
+
+/* Level number pulse */
+.level.level-up h1 {
+  animation: levelPulse 400ms ease-out;
+}
+/* ---------- LOADING SCREEN ---------- */
+
+.hidden {
+  display: none;
+}
+
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at center,
+    #0b1e3a 0%,
+    #050b18 45%,
+    #02040a 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.potential-ring {
+  width: 160px;
+  height: 160px;
+}
+
+.potential-ring svg {
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  fill: none;
+  stroke: rgba(59,130,246,0.25);
+  stroke-width: 8;
+}
+
+.ring-progress {
+  fill: none;
+  stroke: #3b82f6;
+  stroke-width: 8;
+  stroke-linecap: round;
+  stroke-dasharray: 565;
+  stroke-dashoffset: 565;
+  transition: stroke-dashoffset 1.2s ease;
+}
+
+.loading-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+@keyframes levelPulse {
+  0%   { transform: scale(1);   text-shadow: none; }
+  40%  { transform: scale(1.2); text-shadow: 0 0 18px rgba(59,130,246,0.6); }
+  100% { transform: scale(1);   text-shadow: none; }
+}
+
+/* Ring flash */
+.xp-ring.ring-flash .xp-progress {
+  filter: drop-shadow(0 0 10px rgba(255,140,66,0.8));
+}
+
+/* Optional micro glow on XP text */
+.xp-ring.ring-flash .xp-text {
+  color: #ffffff;
 }
