@@ -20,6 +20,8 @@ const progressCircle = document.querySelector(".xp-progress");
 const loadingScreen = document.querySelector(".loading-screen");
 const dashboard = document.querySelector(".dashboard");
 const loadingRing = document.querySelector(".ring-progress");
+const bodySilhouette = document.querySelector(".body-silhouette");
+
 
 
 // ---------- INIT ----------
@@ -34,6 +36,7 @@ button.addEventListener("click", completeWorkout);
 let lastRenderedLevel = state.level;
 
 function triggerLevelUp() {
+    localStorage.setItem("levelup_force_full_loading", "true");
   const levelSection = document.querySelector(".level");
   const ring = document.querySelector(".xp-ring");
 
@@ -49,15 +52,28 @@ function playLoadingScreen() {
   const reason = getLoadingReason();
   const circumference = 565;
 
-  let duration = 1200; // short by default
+  let duration = 1200;
 
-  if (reason === LOADING_REASON.FIRST_OPEN) {
-    duration = 3500; // full cinematic
+  if (
+    reason === LOADING_REASON.FIRST_OPEN ||
+    reason === LOADING_REASON.LEVEL_UP
+  ) {
+    duration = 3500;
   }
 
+  // Reset body
+  bodySilhouette.classList.remove("reveal");
+
+  // Start ring
   loadingRing.style.transition = `stroke-dashoffset ${duration}ms ease`;
   loadingRing.style.strokeDashoffset = 0;
 
+  // Start body reveal slightly after ring starts
+  setTimeout(() => {
+    bodySilhouette.classList.add("reveal");
+  }, 200);
+
+  // End loading
   setTimeout(() => {
     loadingScreen.classList.add("hidden");
     dashboard.classList.remove("hidden");
@@ -65,6 +81,13 @@ function playLoadingScreen() {
 }
 
 function getLoadingReason() {
+  // 🔥 FORCE FULL IF LEVEL-UP JUST HAPPENED
+  const forceFull = localStorage.getItem("levelup_force_full_loading");
+  if (forceFull) {
+    localStorage.removeItem("levelup_force_full_loading");
+    return LOADING_REASON.LEVEL_UP;
+  }
+
   const hasOpenedBefore = localStorage.getItem("levelup_opened");
 
   if (!hasOpenedBefore) {
@@ -74,6 +97,7 @@ function getLoadingReason() {
 
   return LOADING_REASON.DAILY;
 }
+
 
 
 function completeWorkout() {

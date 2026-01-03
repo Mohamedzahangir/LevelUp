@@ -192,6 +192,151 @@ body {
   color: var(--text-muted);
   letter-spacing: 0.08em;
 }
+/* ---------- BODY REVEAL ---------- */
+
+.body-reveal {
+  width: 180px;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ---------- BODY : BASE ---------- */
+
+.body-silhouette {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 90px 90px 50px 50px;
+
+  /* Base skin */
+  background:
+    radial-gradient(
+      120px 180px at 50% 25%,
+      rgba(255,255,255,0.18),
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.04)
+    );
+
+  /* Depth */
+  box-shadow:
+    inset 0 0 40px rgba(255,255,255,0.06),
+    inset 0 -40px 60px rgba(0,0,0,0.25);
+
+  /* Reveal handled elsewhere */
+  
+}
+.body-silhouette.male {
+  border-radius: 80px 80px 45px 45px;
+  transform: scaleX(1.05);
+}
+.body-silhouette.female-balanced {
+  border-radius: 95px 95px 55px 55px;
+  transform: scaleX(0.95);
+}
+.body-silhouette.female-lean {
+  border-radius: 90px 90px 50px 50px;
+  transform: scaleX(0.9);
+  opacity: 0.95;
+}
+.body-silhouette.female-athletic {
+  border-radius: 85px 85px 50px 50px;
+  transform: scaleX(1);
+}
+.body-silhouette.emphasis-waist {
+  background:
+    radial-gradient(
+      80px 120px at 50% 55%,
+      rgba(255,255,255,0.22),
+      transparent 65%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.04)
+    );
+}
+.body-silhouette.emphasis-legs {
+  background:
+    radial-gradient(
+      120px 160px at 50% 75%,
+      rgba(255,255,255,0.22),
+      transparent 70%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.04)
+    );
+}
+.body-silhouette.emphasis-upper {
+  background:
+    radial-gradient(
+      140px 160px at 50% 20%,
+      rgba(255,255,255,0.24),
+      transparent 65%
+    ),
+    linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.04)
+    );
+}
+.body-silhouette.posture-elegant {
+  transform: translateX(-3px) rotate(-0.8deg);
+}
+.body-silhouette.posture-confident {
+  transform: translateX(0) rotate(0deg);
+}
+.body-silhouette.posture-neutral {
+  transform: translateX(0);
+}
+
+
+/* Reveal animation */
+.body-silhouette.reveal {
+  animation: revealBody 1.4s ease-out forwards;
+}
+
+@keyframes revealBody {
+  from {
+    -webkit-mask-position: 0 100%;
+            mask-position: 0 100%;
+  }
+  to {
+    -webkit-mask-position: 0 0%;
+            mask-position: 0 0%;
+  }
+}
+/* ---------- POTENTIAL WRAPPER ---------- */
+
+.potential-wrapper {
+  position: relative;
+  width: 200px;
+  height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ring BEHIND */
+.potential-ring {
+  position: absolute;
+  top: 0;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Body IN FRONT */
+.body-reveal {
+  position: relative;
+  z-index: 2;
+  margin-top: 40px; /* pushes body down into ring */
+}
 
 @keyframes levelPulse {
   0%   { transform: scale(1);   text-shadow: none; }
