@@ -1,4 +1,4 @@
-# LevelUp 🟦⚡
+# LevelUp ⬆️⚡
 
 **LevelUp** is a gamified fitness web application focused on **discipline, consistency, and long-term progress**.  
 It transforms daily fitness actions into a clear progression system using **levels, XP, streaks**, and a unique **“Hidden Potential” cinematic loading experience**.
